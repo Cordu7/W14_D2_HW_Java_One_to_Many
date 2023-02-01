@@ -1,6 +1,7 @@
 package com.example.filesManager.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ public class Person {
     private Long id;
     @Column(name = "name")
     private String name;
-    @JsonBackReference
-    @OneToMany
+    @JsonManagedReference
+    @OneToMany(mappedBy = "person")
     private List<Folder> folders;
 
     public Person(String name) {

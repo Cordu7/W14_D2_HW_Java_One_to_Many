@@ -1,13 +1,12 @@
 package com.example.filesManager.models;
 
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.nio.file.Files;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +21,14 @@ public class Folder {
     @Column(name = "title")
     private String title;
 
-    @JsonBackReference
-    @OneToMany
+    @JsonManagedReference
+    @OneToMany(mappedBy = "folder")
+    //connects to folder indicates key in table where to look for primary key and which table's primary key to map
     private List<File> files;
 
     @ManyToOne
     @JoinColumn(name = "person_id", nullable = true)
-    @JsonManagedReference
+    @JsonBackReference
     private Person person;
 
     public Folder(String title, Person person) {

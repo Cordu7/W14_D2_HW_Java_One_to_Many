@@ -1,7 +1,8 @@
 package com.example.filesManager.models;
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 import javax.persistence.*;
 
@@ -19,10 +20,10 @@ public class File {
     private Integer size;
     @ManyToOne
     @JoinColumn(name = "folder_id", nullable = true)
-    @JsonManagedReference
+    @JsonBackReference
     private Folder folder;
 
-    public File(){}
+
 
     public File(String name, String extension, Integer size, Folder folder) {
         this.name = name;
@@ -30,6 +31,8 @@ public class File {
         this.size = size;
         this.folder = folder;
     }
+
+    public File(){}
 
     public Long getId() {
         return id;
